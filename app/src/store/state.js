@@ -1,4 +1,4 @@
-export default {
+let state = {
   web3: {
     isInjected: false,
     web3Instance: null,
@@ -9,3 +9,4 @@ export default {
   },
   contractInstance: null
 }
+export default state

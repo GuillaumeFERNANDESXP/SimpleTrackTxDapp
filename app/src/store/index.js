@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import state from './module-example/state'
+import state from './state'
 import getWeb3 from '../util/getWeb3'
 
 // import example from './module-example'
@@ -14,6 +14,7 @@ Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+    strict: true,
     state,
     mutations: {
       registerWeb3Instance (state, payload) {
@@ -38,10 +39,9 @@ export default function (/* { ssrContext } */) {
           console.log('error in action registerWeb3', e)
         })
       }
-    },
+    }
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: true
   })
 
   return Store
