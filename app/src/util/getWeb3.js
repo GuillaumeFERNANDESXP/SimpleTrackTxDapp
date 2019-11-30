@@ -17,6 +17,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
     console.log('***WEB3.VERSION IS : ' + web3.version + '***')
     console.log('***ACCOUNTS IS ' + web3.eth.getAccounts(console.log) + '***')
     console.log('***NETWORK VERSION IS ' + web3.eth.net.getNetworkType().then(console.log) + '***')
+    console.log('***NETWORK VERSION IS ' + web3.eth.getChainId().then(console.log) + '***')
     resolve({
       injectedWeb3: window.ethereum.isMetaMask,
       web3 () {
@@ -28,21 +29,21 @@ let getWeb3 = new Promise(function (resolve, reject) {
     reject(new Error('Unable to connect to Metamask'))
   }
 })
-// .then(result => {
-//   return new Promise(function (resolve, reject) {
-//     // Retrieve network ID
-//     result.web3().version.getNetwork((err, networkId) => {
-//       if (err) {
-//         // If we can't find a networkId keep result the same and reject the promise
-//         reject(new Error('Unable to retrieve network ID'))
-//       } else {
-//         // Assign the networkId property to our result and resolve promise
-//         result = Object.assign({}, result, { networkId })
-//         resolve(result)
-//       }
-//     })
-//   })
-// })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      // Retrieve network ID
+      result.web3().eth.getChainId((err, networkId) => {
+        if (err) {
+          // If we can't find a networkId keep result the same and reject the promise
+          reject(new Error('Unable to retrieve network ID'))
+        } else {
+          // Assign the networkId property to our result and resolve promise
+          result = Object.assign({}, result, { networkId })
+          resolve(result)
+        }
+      })
+    })
+  })
 // .then(result => {
 //   return new Promise(function (resolve, reject) {
 //     // Retrieve coinbase
