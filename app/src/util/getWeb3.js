@@ -44,13 +44,13 @@ let getWeb3 = new Promise(function (resolve, reject) {
   .then(result => {
     return new Promise(function (resolve, reject) {
       // Retrieve coinbase
+      console.log('TEST TEST TESt ' + result.web3().eth.getAccounts().then(console.log))
       result.web3().eth.getCoinbase((err, account) => {
         if (err) {
           reject(new Error('Unable to retrieve coinbase'))
         } else {
           result = Object.assign({}, result, { account })
           resolve(result)
-          console.log('THE RESULT IS HERE ! ! : ' + result)
         }
       })
     })
