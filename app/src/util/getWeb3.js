@@ -14,6 +14,9 @@ let getWeb3 = new Promise(function (resolve, reject) {
   window.ethereum.enable()
   if (typeof web3js !== 'undefined') {
     var web3 = new Web3(web3js.currentProvider)
+    console.log('***WEB3.VERSION IS : ' + web3.version + '***')
+    console.log('***ACCOUNTS IS ' + web3.eth.getAccounts(console.log) + '***')
+    console.log('***NETWORK VERSION IS ' + web3.eth.net.getNetworkType().then(console.log) + '***')
     resolve({
       injectedWeb3: window.ethereum.isMetaMask,
       web3 () {
