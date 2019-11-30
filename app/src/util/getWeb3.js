@@ -16,8 +16,8 @@ let getWeb3 = new Promise(function (resolve, reject) {
     var web3 = new Web3(web3js.currentProvider)
     console.log('***WEB3.VERSION IS : ' + web3.version + '***')
     console.log('***ACCOUNTS IS ' + web3.eth.getAccounts(console.log) + '***')
-    console.log('***NETWORK VERSION IS ' + web3.eth.net.getNetworkType().then(console.log) + '***')
-    console.log('***NETWORK VERSION IS ' + web3.eth.getChainId().then(console.log) + '***')
+    console.log('*** BALANCE IS ' + web3.eth.getBalance('0xB74fc3B69f626226f7F1c53D9D6D340AC291d481')
+      .then(console.log) + '***')
     resolve({
       injectedWeb3: window.ethereum.isMetaMask,
       web3 () {
@@ -44,31 +44,31 @@ let getWeb3 = new Promise(function (resolve, reject) {
       })
     })
   })
-// .then(result => {
-//   return new Promise(function (resolve, reject) {
-//     // Retrieve coinbase
-//     result.web3().eth.getCoinbase((err, coinbase) => {
-//       if (err) {
-//         reject(new Error('Unable to retrieve coinbase'))
-//       } else {
-//         result = Object.assign({}, result, { coinbase })
-//         resolve(result)
-//       }
-//     })
-//   })
-// })
-// .then(result => {
-//   return new Promise(function (resolve, reject) {
-//     // Retrieve balance for coinbase
-//     result.web3().eth.getBalance(result.coinbase, (err, balance) => {
-//       if (err) {
-//         reject(new Error('Unable to retrieve balance for address: ' + result.coinbase))
-//       } else {
-//         result = Object.assign({}, result, { balance })
-//         resolve(result)
-//       }
-//     })
-//   })
-// })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      // Retrieve coinbase
+      result.web3().eth.getCoinbase((err, coinbase) => {
+        if (err) {
+          reject(new Error('Unable to retrieve coinbase'))
+        } else {
+          result = Object.assign({}, result, { coinbase })
+          resolve(result)
+        }
+      })
+    })
+  })
+  .then(result => {
+    return new Promise(function (resolve, reject) {
+      // Retrieve balance for coinbase
+      result.web3().eth.getBalance(result.coinbase, (err, balance) => {
+        if (err) {
+          reject(new Error('Unable to retrieve balance for address: ' + result.coinbase))
+        } else {
+          result = Object.assign({}, result, { balance })
+          resolve(result)
+        }
+      })
+    })
+  })
 
 export default getWeb3
