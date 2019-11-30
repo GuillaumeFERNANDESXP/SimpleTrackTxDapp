@@ -15,7 +15,6 @@ let getWeb3 = new Promise(function (resolve, reject) {
   if (typeof web3js !== 'undefined') {
     var web3 = new Web3(web3js.currentProvider)
     console.log('***WEB3.VERSION IS : ' + web3.version + '***')
-      .then(console.log) + '***')
     resolve({
       injectedWeb3: window.ethereum.isMetaMask,
       web3 () {
@@ -45,20 +44,21 @@ let getWeb3 = new Promise(function (resolve, reject) {
   .then(result => {
     return new Promise(function (resolve, reject) {
       // Retrieve coinbase
-      result.web3().eth.getCoinbase((err, coinbase) => {
+      result.web3().eth.getCoinbase((err, account) => {
         if (err) {
           reject(new Error('Unable to retrieve coinbase'))
         } else {
-          result = Object.assign({}, result, { coinbase })
+          result = Object.assign({}, result, { account })
           resolve(result)
+          console.log('THE RESULT IS HERE ! ! : ' + result)
         }
       })
     })
   })
   .then(result => {
     return new Promise(function (resolve, reject) {
-      // Retrieve balance for coinbase
-      result.web3().eth.getBalance(result.coinbase, (err, balance) => {
+      // Retrieve balance for account
+      result.web3().eth.getBalance(result.account, (err, balance) => {
         if (err) {
           reject(new Error('Unable to retrieve balance for address: ' + result.coinbase))
         } else {

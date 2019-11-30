@@ -9,7 +9,7 @@
       </q-card-section>
 
       <q-card-section>
-    <p>Account: {{ coinbase }}</p>
+    <p>Account: {{ account }}</p>
     <p>Balance: {{ balance }} Wei // {{ ethBalance }} Eth</p>
       </q-card-section>
     </q-card>
@@ -23,7 +23,7 @@ export default {
   computed: mapState({
     isInjected: state => state.web3.isInjected,
     network: state => NETWORKS[state.web3.networkId],
-    coinbase: state => state.web3.coinbase,
+    account: state => state.web3.account,
     balance: state => state.web3.balance
     // ethBalance: state => {
     //   if (state.web3.web3Instance !== null) return state.web3.web3Instance().fromWei(state.web3.balance, 'ether')
