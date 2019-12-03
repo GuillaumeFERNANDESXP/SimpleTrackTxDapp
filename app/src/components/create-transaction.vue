@@ -18,10 +18,10 @@
         <p>To:</p>
         <q-input outlined></q-input>
         <div>
-          <q-btn @click="sendEther" label="Send Ether" />
+          <q-btn @click="getAccounts" label="Get Account" />
         </div>
         <div>
-          <q-btn @click="sendEtherWithInfura" label="Send Ether With Infura" />
+          <q-btn @click="sendEther" label="Send Ether" />
         </div>
         <div>
           <!-- <q-btn label="Send" type="submit" color="primary" /> -->
@@ -36,25 +36,28 @@ import Web3 from 'web3'
 export default {
   name: 'create-transaction',
   methods: {
-    sendEther () {
+    getAccounts () {
       var web3js = window.web3
       var web3 = new Web3(web3js.currentProvider)
       web3.eth.getAccounts(function (error, result) {
         if (!error) {
           let account = result
           console.log('Your account address :' + account)
-          web3.eth
-            .sendTransaction({
-              from: '0xB74fc3B69f626226f7F1c53D9D6D340AC291d481',
-              to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
-              value: '10017897978000000'
-            })
-            .on('transactionHash', function (hash) {
-              console.log('THIS IS TXH HASH  ' + hash)
-            })
-            .on('error', console.error)
         }
       })
+    },
+    sendEther () {
+      var web3js = window.web3
+      var web3 = new Web3(web3js.currentProvider)
+      web3.eth.sendTransaction({
+        from: '0xB74fc3B69f626226f7F1c53D9D6D340AC291d481',
+        to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
+        value: '10017897978000000'
+      })
+        .on('transactionHash', function (hash) {
+          console.log('THIS IS TXH HASH  ' + hash)
+        })
+        .on('error', console.error)
     }
   }
 }
