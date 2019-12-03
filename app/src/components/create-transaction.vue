@@ -24,6 +24,9 @@
           <q-btn @click="sendEther" label="Send Ether" />
         </div>
         <div>
+          <q-btn @click="getTxHash" label="get Tx Hash" />
+        </div>
+        <div>
           <!-- <q-btn label="Send" type="submit" color="primary" /> -->
         </div>
       </q-card-section>
@@ -33,6 +36,7 @@
 </template>
 <script>
 import Web3 from 'web3'
+import txHash from '../util/makeTx'
 export default {
   name: 'create-transaction',
   methods: {
@@ -46,9 +50,11 @@ export default {
         }
       })
     },
+    getTxHash () {
+      return txHash()
+    },
     sendEther () {
-      var web3js = window.web3
-      var web3 = new Web3(web3js.currentProvider)
+      var web3 = new Web3(window.web3.currentProvider)
       web3.eth.sendTransaction({
         from: '0xB74fc3B69f626226f7F1c53D9D6D340AC291d481',
         to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
