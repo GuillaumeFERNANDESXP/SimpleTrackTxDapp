@@ -13,10 +13,21 @@ let getTxHash = function () {
     })
 }
 
-let txHash = async function () {
+let txHash = function () {
   const web3 = new Web3(new Web3.providers.HttpProvider('ropsten.infura.io/v3/ecd08f482701425fbc7dd36db8c63358'))
-  const tx = await getTxHash()
-  const subscription = web3.eth.subscribe('pendingTransactions')
-  console.log(subscription, tx)
+  const tx = getTxHash()
+  var subscription = web3.eth.subscribe('pendingTransactions', function (error, result) {
+    if (!error) {
+      console.log(result)
+    }
+  })
+    .on('data', function (transaction) {
+      console.log(transaction)
+    })
+  subscription.unsubscribe(function (error, success) {
+    if (success) {
+      console.log('Successfully unsubscribed!' + error)
+    }
+  })
 }
 export default txHash
