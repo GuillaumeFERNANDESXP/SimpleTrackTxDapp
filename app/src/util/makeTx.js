@@ -20,7 +20,7 @@ let txHash = function () {
     console.log('error: ', error)
   })
     .on('data', (log) => {
-      console.log('data: ', log)
+      console.log('data: ', log) // if(log===tx) { console.log...}
     })
     .on('error', (log) => {
       console.log('error: ', log)
