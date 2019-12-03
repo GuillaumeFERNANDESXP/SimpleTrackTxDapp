@@ -10,7 +10,7 @@
 
       <q-card-section>
     <p>Account: {{ account }}</p>
-    <p>Balance: {{ balance }} Wei // {{ ethBalance }} Eth</p>
+    <p>Balance: {{ balance }} Wei </p>
       </q-card-section>
     </q-card>
   </div>

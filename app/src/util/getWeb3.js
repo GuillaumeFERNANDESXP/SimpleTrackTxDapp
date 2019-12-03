@@ -44,7 +44,7 @@ let getWeb3 = new Promise(function (resolve, reject) {
   .then(result => {
     return new Promise(function (resolve, reject) {
       // Retrieve coinbase
-      console.log('TEST TEST TEST ' + result.web3().eth.getAccounts().then(console.log))
+      console.log(result.web3().eth.getAccounts().then(console.log))
       result.web3().eth.getCoinbase((err, account) => {
         if (err) {
           reject(new Error('Unable to retrieve coinbase'))
