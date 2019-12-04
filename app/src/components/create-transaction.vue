@@ -51,14 +51,14 @@ export default {
       })
     },
     getTxHash () {
-      return txHash()
+      return txHash('0xB74fc3B69f626226f7F1c53D9D6D340AC291d481')
     },
     sendEther () {
       var web3 = new Web3(window.web3.currentProvider)
       web3.eth.sendTransaction({
         from: '0xB74fc3B69f626226f7F1c53D9D6D340AC291d481',
         to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
-        value: '10017897978000000'
+        value: '100178979780000'
       })
         .on('transactionHash', function (hash) {
           console.log('THIS IS TXH HASH  ' + hash)
