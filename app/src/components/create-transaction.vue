@@ -18,6 +18,7 @@
         <p>To:</p>
         <q-input outlined></q-input>
         <div>
+          {{account}}
           <q-btn @click="getAccounts" label="Get Account" />
         </div>
         <div>
@@ -35,35 +36,34 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Web3 from 'web3'
 import txHash from '../util/makeTx'
 export default {
   name: 'create-transaction',
+  computed: mapState({
+    account: state => state.web3.account
+  }),
   methods: {
     getAccounts () {
-      var web3js = window.web3
-      var web3 = new Web3(web3js.currentProvider)
-      web3.eth.getAccounts(function (error, result) {
+      var web3 = new Web3(window.web3.currentProvider)
+      return web3.eth.getAccounts(function (error, result) {
         if (!error) {
-          let account = result
-          console.log('Your account address :' + account)
+          console.log('Your account address :' + result)
+          return result
         }
       })
     },
     getTxHash () {
-      return txHash('0xB74fc3B69f626226f7F1c53D9D6D340AC291d481')
+      return txHash(this.account)
     },
     sendEther () {
       var web3 = new Web3(window.web3.currentProvider)
       web3.eth.sendTransaction({
-        from: '0xB74fc3B69f626226f7F1c53D9D6D340AC291d481',
+        from: this.account,
         to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
         value: '100178979780000'
       })
-        .on('transactionHash', function (hash) {
-          console.log('THIS IS TXH HASH  ' + hash)
-        })
-        .on('error', console.error)
     }
   }
 }

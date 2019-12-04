@@ -19,8 +19,5 @@ let txHash = function (address) {
     .on('error', (log) => {
       console.log('error: ', log)
     })
-//   subscription.unsubscribe(function (error, success) {
-//     if (error) console.log('Success Unscribed')
-//   })
 }
 export default txHash
