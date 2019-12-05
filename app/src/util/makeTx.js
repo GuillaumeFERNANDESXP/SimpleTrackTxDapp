@@ -7,6 +7,7 @@ let txHash = function (address) {
   })
     .on('data', function (txHash) {
       return web3.eth.getTransaction(txHash, (err, returnedValue) => {
+        console.log(txHash)
         if (err) {
           console.log(err)
         }
