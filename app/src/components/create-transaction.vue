@@ -17,9 +17,7 @@
         </div>
         <p>To:</p>
         <q-input outlined></q-input>
-        <div>
-          {{account}}
-        </div>
+        <div>{{account}}</div>
         <div>
           <q-btn @click="sendEther" label="Send Ether" />
         </div>
@@ -37,8 +35,8 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import Web3 from 'web3'
 import txHash from '../util/makeTx'
+import sendEther from '../util/sendEther'
 export default {
   name: 'create-transaction',
   computed: mapState({
@@ -49,14 +47,7 @@ export default {
       return txHash(this.account)
     },
     sendEther () {
-      var web3 = new Web3(window.web3.currentProvider)
-      web3.eth.sendTransaction({
-        from: this.account,
-        to: '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd',
-        value: '10017897970'
-      }).on('transactionHash', function (hash) {
-        console.log(web3.eth.getTransaction(hash).then(console.log))
-      })
+      sendEther(this.account)
     }
   }
 }
