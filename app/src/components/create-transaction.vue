@@ -19,12 +19,12 @@
         <q-input outlined></q-input>
         <div>
           {{account}}
-          <q-btn @click="getAccounts" label="Get Account" />
         </div>
         <div>
           <q-btn @click="sendEther" label="Send Ether" />
         </div>
         <div>
+          {{getTxHash}}
           <q-btn @click="getTxHash" label="get Tx Hash" />
         </div>
         <div>
@@ -45,15 +45,6 @@ export default {
     account: state => state.web3.account
   }),
   methods: {
-    getAccounts () {
-      var web3 = new Web3(window.web3.currentProvider)
-      return web3.eth.getAccounts(function (error, result) {
-        if (!error) {
-          console.log('Your account address :' + result)
-          return result
-        }
-      })
-    },
     getTxHash () {
       return txHash(this.account)
     },
