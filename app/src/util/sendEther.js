@@ -10,6 +10,9 @@ let sendEther = function (account) {
     })
     .on('transactionHash', function (hash) {
       console.log(web3.eth.getTransaction(hash).then(console.log))
+    }).on('transactionHash', function () {
+      const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'))
+      console.log(web3.eth.getBlockNumber().then(console.log))
     })
 }
 export default sendEther
