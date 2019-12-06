@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 
-export default function sendEther (account) {
+let sendEther = function (account) {
   var web3 = new Web3(window.web3.currentProvider)
   return web3.eth.sendTransaction({
     from: account,
@@ -19,7 +19,7 @@ export default function sendEther (account) {
         const gasPrice = value.gasPrice
         const gasValue = value.gas
         const ethValue = value.value
-        const transaction = {
+        var transaction = {
           hash,
           blockNumber,
           transactionIndex,
@@ -51,3 +51,5 @@ export default function sendEther (account) {
       }
     })
 }
+
+export default sendEther

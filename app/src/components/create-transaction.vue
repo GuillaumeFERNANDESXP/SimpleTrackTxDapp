@@ -2,9 +2,6 @@
   <div class="q-pa-md row items-start q-gutter-md flex flex-center">
     <q-card class="my-card">
       <q-card-section>
-        <p v-if="isInjected" id="has-metamask">
-          <i aria-hidden="true" class="fa fa-check"></i> Metamask installed
-        </p>
         <div class="text-h6">Create a TX</div>
       </q-card-section>
       <q-card-section>
@@ -34,7 +31,7 @@ export default {
   }),
   methods: {
     sendEther () {
-      return sendEther(this.account)// return hash
+      return sendEther(this.account)
     }
   }
 }
