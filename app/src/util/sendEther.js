@@ -9,14 +9,15 @@ export default function sendEther (account) {
   })
     .on('transactionHash', function (hash) {
       console.log('Transaction hash : ' + hash) // return Hash of tx
-      console.log('Number of the block ')
-      web3.eth.getTransaction(hash).then(console.log) // Object of the tx to send 
+      console.log('Pending ')
+      web3.eth.getTransaction(hash).then(console.log) // Object of the tx to send
     })
     .on('receipt', function (receipt) {
+      console.log('Mined ')
       console.log(receipt) // Tx is mined, here the receipt
-      console.log('Index position :' + receipt.transactionIndex + 'in the block number :' + receipt.blockNumber) // Tx's index in the block
+      console.log('Index position  ' + receipt.transactionIndex + '  in the block number  ' + receipt.blockNumber) // Tx's index in the block
     })
-    .on('confirmation', function (confirmationNumber, receipt) {
+    .on('confirmation', function (confirmationNumber) {
       if (confirmationNumber === 6) {
         console.log('LIGHT CONF IS OK  ' + confirmationNumber)
       }

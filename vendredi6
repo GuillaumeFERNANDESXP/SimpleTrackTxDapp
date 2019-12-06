@@ -1,0 +1,55 @@
+###USE CASE 
+
+
+Use case #1 user sends tx and closes laptop (or loses power) 
+User then reconnects from mobile and wants to followup on his tx
+
+Le store est remplacé par un objet vierge
+C est tres puissant de pouvoir suivre ta tx across devices, sans forcement avoir metamask installé ni te preoccuper de de devoir transferer un tx hash sur un autre device
+Parce que le moyen du bord d avoir le mm resultat, c est de copier le tx hash, te l envoyer par email ou sur Google Keep, puis le recup sur l autre device, et le coller dans etherscan and hit refresh until it shows up.
+
+
+Le store c est juste du cache
+Quand tu log out il est WIPED
+
+
+Le store est remplacé par un objet vierge
+C est tres puissant de pouvoir suivre ta tx across devices, sans forcement avoir metamask installé ni te preoccuper de de devoir transferer un tx hash sur un autre device
+
+Parce que le moyen du bord d aviir
+..le mm resultat, c est de copier le tx hash, te l envoyer par email ou sur Google Keep, puis le recup sur l autre device, et le coller dans etherscan and hit refresh until it shows up.
+
+
+### How to setup tx in back end ###
+
+blackscale 19 h 08
+Une fois que t as soumis la tx, tu save une "transaction", en y incluant le hash, 
+et dans un after hook tu lances ton processus asynchrone de tracking. Quand t as recu l event, tu l ajoutes à la transaction dans la db.
+
+Guillaume 19 h 09
+Yes j'étais bon sur le principe, nickel
+blackscale 19 h 10
+Cet array est pr chaque user la liste des 'reçus' de toutes ses activités on-chain opérées via tokengrowth
+Ca peut etre meme plusieurs adresses
+
+D ailleurs j ai pas inspecté ton code, mais il faut s assurer de bien check la presence de la tx dans le state lors de la deniere confirmation (au cas où il y aurait eu une reorg), sinon on ne fait que 'compter x blocks' apres le soi-disant minage de la tx.
+
+Alors qu il faut bien compter x blocs simplement, mais ensuite bien s assurer que la tx (et/ou l event) soit tjs là.
+
+
+Donne aussi un 'status' à la transaction (pending, mined, confirmed6, confirmed72) et garde un timestamp de chaque etape (timeSent, timeMined, timeConf...) et le # du bloc de la tx, plus evidemment les params : gasPrice, gasLimit, ETH value, rawTxData, txData (human readable json with methodName, param names and values), et gasUsed qui sera dispo apres que la tx ait ete minee, ainsi que les events
+
+
+###Why I don't must to do that ###
+
+
+
+### FRONT OF THE DASHBOARD
+
+Pour le tableau de bord des investissements etc.. tu as déjà des idées?
+
+blackscale 20 h 29
+Une ligne/carte par tx: human readable txdata + eth value + timestamp (sent or mined) + status icon/bgcolor (modifié) 
+On click expand with all details
+Pour la short view on va aussi afficher p.ex."Result: xx tokens received, yy tokens reserved"
+Ou alors "Result: address <addrNameForUser> succesfully linked to your profile"
