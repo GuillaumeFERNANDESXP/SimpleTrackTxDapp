@@ -37,17 +37,17 @@ export default function sendEther (account) {
       )
     })
     .on('receipt', function (receipt) {
-      console.log('Status: Mined ')
+      console.log('Status: Mined ') // if value.blockNumber is non null => Mined
       console.log(receipt) // Tx is mined, here the receipt
       console.log('Index position  ' + receipt.transactionIndex + '  in the block number  ' + receipt.blockNumber) // Tx's index in the block
-      console.log()
+      console.log('Cumulated gas :' + receipt.cumulativeGasUsed + ' Gas used ' + receipt.gasUsed)
     })
     .on('confirmation', function (confirmationNumber) {
       if (confirmationNumber === 6) {
-        console.log('Status: Confirmed6  ' + confirmationNumber)
+        console.log('Status: Confirmed' + confirmationNumber)
       }
       if (confirmationNumber === 24) {
-        console.log('Status: Confirmed24  ' + confirmationNumber)
+        console.log('Status: Confirmed' + confirmationNumber)
       }
     })
 }
