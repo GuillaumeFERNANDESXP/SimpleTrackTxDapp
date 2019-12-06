@@ -9,24 +9,26 @@ export default function sendEther (account) {
   })
     .on('transactionHash', function (hash) {
       console.log('Transaction hash : ' + hash) // return Hash of tx
-      console.log('Pending')
+      console.log('Status: Pending')
       web3.eth.getTransaction(hash).then(function (value) {
-        console.log(value)
+        console.log('Gas price: ' + value.gasPrice)
+        console.log('Gas price: ' + value.gasLimit)
+        console.log('Gas price: ' + value.gasPrice)
       }
       )
     })
     .on('receipt', function (receipt) {
-      console.log('Mined ')
+      console.log('Status: Mined ')
       console.log(receipt) // Tx is mined, here the receipt
       console.log('Index position  ' + receipt.transactionIndex + '  in the block number  ' + receipt.blockNumber) // Tx's index in the block
       console.log()
     })
     .on('confirmation', function (confirmationNumber) {
       if (confirmationNumber === 6) {
-        console.log('LIGHT CONF IS OK  ' + confirmationNumber)
+        console.log('Status: Confirmed6  ' + confirmationNumber)
       }
       if (confirmationNumber === 24) {
-        console.log('FINAL CONF IS OK  ' + confirmationNumber)
+        console.log('Status: Confirmed24  ' + confirmationNumber)
       }
     })
 }
