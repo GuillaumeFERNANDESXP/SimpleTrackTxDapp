@@ -9,11 +9,30 @@ export default function sendEther (account) {
   })
     .on('transactionHash', function (hash) {
       console.log('Transaction hash : ' + hash) // return Hash of tx
-      console.log('Status: Pending')
+      console.log('Status: Pending') // if value.blockNumber is null => Pending
       web3.eth.getTransaction(hash).then(function (value) {
-        console.log('Gas price: ' + value.gasPrice)
-        console.log('Gas price: ' + value.gasLimit)
-        console.log('Gas price: ' + value.gasPrice)
+        const hash = value.hash
+        const blockNumber = value.blockNumber
+        const transactionIndex = value.transactionIndex
+        const from = value.from
+        const to = value.to
+        const gasPrice = value.gasPrice
+        const gasValue = value.gas
+        const ethValue = value.value
+        const transaction = {
+          hash,
+          blockNumber,
+          transactionIndex,
+          from,
+          to,
+          gas: {
+            gasPrice,
+            gasValue
+          },
+          ethValue
+        }
+        console.log('Transaction Humain readable')
+        console.log(transaction)
       }
       )
     })
