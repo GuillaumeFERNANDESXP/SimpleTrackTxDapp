@@ -8,18 +8,20 @@ export default function sendEther (account) {
     value: '10017897970'
   })
     .on('transactionHash', function (hash) {
-      console.log(hash) // return Hash pf tx
-      web3.eth.getBlockNumber(console.log)
+      console.log('Transaction hash : ' + hash) // return Hash of tx
+      console.log('Number of the block ')
+      web3.eth.getTransaction(hash).then(console.log) // Object of the tx to send 
     })
-    .on('confirmation', function (receipt) {
-      console.log('Transaction confirmed' + receipt)
-      if (receipt === 5) {
-        console.log('LIGHT CONF IS OK')
-        web3.eth.getBlockNumber(console.log)
+    .on('receipt', function (receipt) {
+      console.log(receipt) // Tx is mined, here the receipt
+      console.log('Index position :' + receipt.transactionIndex + 'in the block number :' + receipt.blockNumber) // Tx's index in the block
+    })
+    .on('confirmation', function (confirmationNumber, receipt) {
+      if (confirmationNumber === 6) {
+        console.log('LIGHT CONF IS OK  ' + confirmationNumber)
       }
-      if (receipt === 72) {
-        console.log('LIGHT CONF IS OK')
-        web3.eth.getBlockNumber(console.log)
+      if (confirmationNumber === 24) {
+        console.log('FINAL CONF IS OK  ' + confirmationNumber)
       }
     })
 }

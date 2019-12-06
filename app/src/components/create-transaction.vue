@@ -17,7 +17,6 @@
         <p>To:</p>
         <q-input outlined></q-input>
         <div>{{account}}</div>
-        Tx Hash {{sendEther}}
         <div>
           <q-btn @click="sendEther" label="Send Ether" />
         </div>
